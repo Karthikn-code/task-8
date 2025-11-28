@@ -1,2 +1,0 @@
-- [ ] Shorten modal content in index.html to remove redundancy and reduce file size
-- [ ] Test the updated file to ensure functionality remains intact
