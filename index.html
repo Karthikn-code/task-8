@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Blog | Bootstrap 5</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .blog-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .card-text {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .category-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .author-info {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+        .sidebar-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-card .card-header {
+            background-color: white;
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border-radius: 15px 15px 0 0 !important;
+        }
+        
+        .list-group-item {
+            border: none;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .list-group-item:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            padding-left: 2rem;
+        }
+        
+        .list-group-item a {
+            text-decoration: none;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .list-group-item:hover a {
+            color: var(--primary-color);
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            margin: 0.2rem;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .newsletter-form {
+            padding: 1.5rem;
+        }
+        
+        .form-control {
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+            border-color: var(--primary-color);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #000);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 5rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin-right: 1.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0;
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-pencil-square me-2"></i>ModernBlog
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Welcome to ModernBlog</h1>
+            <p class="lead mb-4">Discover amazing articles, tutorials, and insights about technology, design, and development.</p>
+            <a href="#featured-posts" class="btn btn-light btn-lg px-4">Explore Articles</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <!-- Blog Posts -->
+            <div class="col-lg-8">
+                <h2 id="featured-posts" class="mb-4 fw-bold">Featured Posts</h2>
+                
+                <!-- Featured Post -->
+                <div class="blog-card">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="card-img-top" alt="Featured blog post">
+                        <div class="position-absolute top-0 start-0 m-3">
+                            <span class="category-badge">Featured</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">The Future of Web Development in 2023</h3>
+                        <p class="card-text">Explore the latest trends and technologies shaping the future of web development. From AI-powered tools to new frameworks, discover what's next for developers.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#webDevModal">Read More <i class="bi bi-arrow-right ms-1"></i></button>
+                            <small class="text-muted">5 min read</small>
+                        </div>
+                        <div class="author-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author" class="author-avatar">
+                            <div>
+                                <div class="fw-bold">John Anderson</div>
+                                <small class="text-muted">Posted on June 15, 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Post Cards -->
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-md-6">
+                        <div class="blog-card h-100">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" class="card-img-top" alt="Blog post image">
+                            <div class="card-body">
+                                <span class="category-badge">Design</span>
+                                <h5 class="card-title">UI/UX Best Practices for Mobile Apps</h5>
+                                <p class="card-text">Learn how to create intuitive and engaging mobile experiences with these UI/UX design principles.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uiuxModal">Read More</button>
+                                    <small class="text-muted">4 min read</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="col-md-6">
+                        <div class="blog-card h-100">
+                            <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" class="card-img-top" alt="Blog post image">
+                            <div class="card-body">
+                                <span class="category-badge">Development</span>
+                                <h5 class="card-title">Mastering JavaScript ES6+ Features</h5>
+                                <p class="card-text">Deep dive into the most useful ES6+ features that will make your JavaScript code cleaner and more efficient.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#jsModal">Read More</button>
+                                    <small class="text-muted">7 min read</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3 -->
+                    <div class="col-md-6">
+                        <div class="blog-card h-100">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="card-img-top" alt="Blog post image">
+                            <div class="card-body">
+                                <span class="category-badge">Productivity</span>
+                                <h5 class="card-title">10 Tools to Boost Developer Productivity</h5>
+                                <p class="card-text">Discover essential tools and extensions that can significantly improve your development workflow.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productivityModal">Read More</button>
+                                    <small class="text-muted">5 min read</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 4 -->
+                    <div class="col-md-6">
+                        <div class="blog-card h-100">
+                            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="card-img-top" alt="Blog post image">
+                            <div class="card-body">
+                                <span class="category-badge">Security</span>
+                                <h5 class="card-title">Web Security Best Practices for 2023</h5>
+                                <p class="card-text">Learn how to protect your web applications from common vulnerabilities and security threats.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#securityModal">Read More</button>
+                                    <small class="text-muted">6 min read</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <nav aria-label="Blog pagination" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- About Card -->
+                <div class="sidebar-card">
+                    <div class="card-header">
+                        About ModernBlog
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">We are a community of developers, designers, and tech enthusiasts sharing knowledge and insights about the latest trends in technology.</p>
+                        <div class="d-grid">
+                            <a href="#" class="btn btn-outline-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categories Card -->
+                <div class="sidebar-card" id="categories">
+                    <div class="card-header">
+                        Categories
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="#" class="d-flex justify-content-between align-items-center">
+                                <span>Web Development</span>
+                                <small class="text-muted">15 posts</small>
+                            </a>
+                            <small class="text-muted d-block mt-1">Tutorials on HTML, CSS, JavaScript, and modern frameworks</small>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="d-flex justify-content-between align-items-center">
+                                <span>UI/UX Design</span>
+                                <small class="text-muted">12 posts</small>
+                            </a>
+                            <small class="text-muted d-block mt-1">Design principles, tools, and user experience insights</small>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="d-flex justify-content-between align-items-center">
+                                <span>Mobile Development</span>
+                                <small class="text-muted">8 posts</small>
+                            </a>
+                            <small class="text-muted d-block mt-1">iOS, Android, and cross-platform development guides</small>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="d-flex justify-content-between align-items-center">
+                                <span>DevOps</span>
+                                <small class="text-muted">10 posts</small>
+                            </a>
+                            <small class="text-muted d-block mt-1">CI/CD, cloud deployment, and infrastructure management</small>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="d-flex justify-content-between align-items-center">
+                                <span>Data Science</span>
+                                <small class="text-muted">9 posts</small>
+                            </a>
+                            <small class="text-muted d-block mt-1">Machine learning, analytics, and data visualization</small>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="d-flex justify-content-between align-items-center">
+                                <span>Career Advice</span>
+                                <small class="text-muted">7 posts</small>
+                            </a>
+                            <small class="text-muted d-block mt-1">Tips for developers, interviews, and professional growth</small>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Popular Tags -->
+                <div class="sidebar-card">
+                    <div class="card-header">
+                        Popular Tags
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="tag">JavaScript</a>
+                        <a href="#" class="tag">React</a>
+                        <a href="#" class="tag">CSS</a>
+                        <a href="#" class="tag">Bootstrap</a>
+                        <a href="#" class="tag">Node.js</a>
+                        <a href="#" class="tag">Python</a>
+                        <a href="#" class="tag">API</a>
+                        <a href="#" class="tag">Security</a>
+                        <a href="#" class="tag">Mobile</a>
+                        <a href="#" class="tag">Design</a>
+                    </div>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="sidebar-card">
+                    <div class="card-header">
+                        Newsletter
+                    </div>
+                    <div class="newsletter-form">
+                        <p class="card-text mb-3">Subscribe to our newsletter to get updates on new articles and resources.</p>
+                        <form>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your email address">
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="fw-bold mb-3">ModernBlog</h4>
+                    <p class="mb-4">Sharing knowledge and insights about technology, design, and development.</p>
+                    <div>
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <div class="footer-links d-flex flex-column">
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="fw-bold mb-3">Categories</h5>
+                    <div class="footer-links d-flex flex-column">
+                        <a href="#">Web Development</a>
+                        <a href="#">Design</a>
+                        <a href="#">Mobile</a>
+                        <a href="#">DevOps</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">Contact Info</h5>
+                    <p><i class="bi bi-geo-alt me-2"></i> 123 Tech Street, San Francisco, CA</p>
+                    <p><i class="bi bi-envelope me-2"></i> info@modernblog.com</p>
+                    <p><i class="bi bi-phone me-2"></i> +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p>&copy; 2023 ModernBlog. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for JavaScript ES6+ Article -->
+    <div class="modal fade" id="jsModal" tabindex="-1" aria-labelledby="jsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="jsModalLabel">Mastering JavaScript ES6+ Features</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" class="img-fluid mb-4" alt="JavaScript ES6+">
+                    <p class="lead">ES6+ revolutionized JavaScript with arrow functions, destructuring, promises, async/await, and modules for cleaner, efficient code.</p>
+                    <p>Key resources: MDN Web Docs, JavaScript.info, Eloquent JavaScript.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Share Article</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for UI/UX Best Practices Article -->
+    <div class="modal fade" id="uiuxModal" tabindex="-1" aria-labelledby="uiuxModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uiuxModalLabel">UI/UX Best Practices for Mobile Apps</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" class="img-fluid mb-4" alt="UI/UX Design">
+                    <p class="lead">Creating intuitive and engaging mobile experiences requires a deep understanding of user behavior, design principles, and technical constraints. In this comprehensive guide, we'll explore the essential UI/UX best practices that can transform your mobile app from good to exceptional.</p>
+
+                    <h4>Core Principles of Mobile UI/UX Design</h4>
+
+                    <h5>1. Mobile-First Approach</h5>
+                    <p>Design for mobile devices first, then scale up for larger screens. Mobile users have different needs and behaviors compared to desktop users - they want quick access to information and seamless interactions.</p>
+
+                    <h5>2. Thumb-Friendly Design</h5>
+                    <p>Place important interactive elements within the natural reach of users' thumbs. The optimal touch target size is 44x44 pixels, and critical actions should be positioned at the bottom of the screen for easy one-handed use.</p>
+
+                    <h5>3. Clear Visual Hierarchy</h5>
+                    <p>Use typography, color, and spacing to guide users' attention. Important elements should stand out, while secondary information should be appropriately subdued. Consistent spacing and alignment create a sense of order and professionalism.</p>
+
+                    <h4>Navigation and User Flow</h4>
+
+                    <h5>Bottom Navigation for Primary Actions</h5>
+                    <p>Reserve bottom navigation for your app's most important sections. Use clear icons with labels for better usability. Limit bottom navigation to 3-5 items to avoid cognitive overload.</p>
+
+                    <h5>Gesture-Based Interactions</h5>
+                    <p>Leverage native mobile gestures like swipe, pinch, and long-press. These interactions feel natural and can significantly improve user experience when implemented thoughtfully.</p>
+
+                    <h5>Progressive Disclosure</h5>
+                    <p>Show only essential information initially, then reveal more details as needed. This reduces cognitive load and helps users focus on completing their current task.</p>
+
+                    <h4>Performance and Accessibility</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Performance Optimization</h5>
+                            <ul>
+                                <li>Optimize images and media</li>
+                                <li>Implement lazy loading</li>
+                                <li>Minimize HTTP requests</li>
+                                <li>Use efficient animations</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Accessibility Features</h5>
+                            <ul>
+                                <li>Support for screen readers</li>
+                                <li>High contrast mode</li>
+                                <li>Large touch targets</li>
+                                <li>Voice control compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Essential Design Patterns</h4>
+                    <ul>
+                        <li><strong>Onboarding Flow:</strong> Guide new users through your app's key features with an intuitive onboarding experience.</li>
+                        <li><strong>Loading States:</strong> Provide clear feedback during loading with skeleton screens or progress indicators.</li>
+                        <li><strong>Error Handling:</strong> Design helpful error messages that guide users toward solutions rather than just displaying technical errors.</li>
+                        <li><strong>Empty States:</strong> Create engaging empty states that encourage users to take action when there's no content to display.</li>
+                    </ul>
+
+                    <h4>Testing and Iteration</h4>
+                    <p>Regular user testing is crucial for maintaining excellent UX. Conduct usability testing sessions, analyze user behavior with analytics tools, and iterate based on real user feedback. A/B testing can help you make data-driven design decisions.</p>
+
+                    <h4>Tools and Resources</h4>
+                    <p>Stay updated with the latest design tools and resources:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Design Tools</h6>
+                            <ul>
+                                <li>Figma for collaborative design</li>
+                                <li>Sketch for macOS users</li>
+                                <li>Adobe XD for prototyping</li>
+                                <li>InVision for design handoff</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Research Tools</h6>
+                            <ul>
+                                <li>Hotjar for user behavior analysis</li>
+                                <li>Mixpanel for event tracking</li>
+                                <li>UserTesting for remote testing</li>
+                                <li>Lookback for moderated sessions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>The Future of Mobile UX</h4>
+                    <p>As technology evolves, so do user expectations. Keep an eye on emerging trends like voice interfaces, augmented reality integration, and AI-powered personalization. The key to successful mobile UX is staying user-centered and continuously adapting to changing user needs and technological capabilities.</p>
+
+                    <p class="text-muted">Remember, great mobile UX is invisible - users should be able to accomplish their goals effortlessly without thinking about the interface. Focus on solving real problems and creating delightful experiences.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Share Article</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Web Development Article -->
+    <div class="modal fade" id="webDevModal" tabindex="-1" aria-labelledby="webDevModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="webDevModalLabel">The Future of Web Development in 2023</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Web Development Future">
+                    <p class="lead">As we step into 2023, the web development landscape continues to evolve at an unprecedented pace. From AI-powered development tools to cutting-edge frameworks, developers are embracing new technologies that promise to revolutionize how we build and interact with the web.</p>
+
+                    <h4>Key Trends Shaping Web Development in 2023</h4>
+
+                    <h5>1. AI-Powered Development Tools</h5>
+                    <p>Artificial Intelligence is transforming the development workflow. Tools like GitHub Copilot and Tabnine are using machine learning to provide intelligent code suggestions, reducing development time and helping developers write better code faster.</p>
+
+                    <h5>2. Server-Side Rendering (SSR) and Static Site Generation (SSG)</h5>
+                    <p>Frameworks like Next.js, Nuxt.js, and Astro are gaining popularity for their ability to provide better performance, SEO, and user experience through server-side rendering and static site generation techniques.</p>
+
+                    <h5>3. WebAssembly (Wasm) Adoption</h5>
+                    <p>WebAssembly is enabling developers to run high-performance applications in the browser. Languages like Rust, C++, and Go can now be compiled to WebAssembly, opening up new possibilities for web applications.</p>
+
+                    <h5>4. Edge Computing and Serverless Architecture</h5>
+                    <p>Edge computing is bringing computation closer to users, reducing latency and improving performance. Combined with serverless functions, this approach allows developers to build scalable applications without managing infrastructure.</p>
+
+                    <h5>5. Progressive Web Apps (PWAs) and Mobile-First Design</h5>
+                    <p>PWAs continue to bridge the gap between web and native mobile applications, offering offline functionality, push notifications, and app-like experiences directly from the browser.</p>
+
+                    <h4>Emerging Technologies to Watch</h4>
+                    <ul>
+                        <li><strong>Web3 and Blockchain Integration:</strong> Decentralized applications and blockchain technology are finding their way into mainstream web development.</li>
+                        <li><strong>Augmented Reality (AR) and Virtual Reality (VR):</strong> WebXR APIs are making AR/VR experiences accessible through web browsers.</li>
+                        <li><strong>Low-Code/No-Code Platforms:</strong> Tools like Bubble, Adalo, and Webflow are democratizing web development, allowing non-technical users to build complex applications.</li>
+                        <li><strong>Micro-Frontends:</strong> Breaking down monolithic applications into smaller, independently deployable pieces for better scalability and team collaboration.</li>
+                    </ul>
+
+                    <h4>Skills to Focus on in 2023</h4>
+                    <p>To stay ahead in the rapidly evolving web development landscape, developers should focus on:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>TypeScript for type-safe JavaScript</li>
+                                <li>React and Vue.js ecosystem</li>
+                                <li>Node.js and serverless functions</li>
+                                <li>GraphQL for efficient data fetching</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Web performance optimization</li>
+                                <li>Accessibility (a11y) best practices</li>
+                                <li>Testing frameworks (Jest, Cypress)</li>
+                                <li>Containerization with Docker</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>The Road Ahead</h4>
+                    <p>The future of web development is bright and full of possibilities. As technology continues to advance, developers who embrace continuous learning and adapt to new tools and methodologies will be best positioned to create innovative web experiences that push the boundaries of what's possible on the web.</p>
+
+                    <p class="text-muted">Stay curious, keep learning, and embrace the changes that 2023 brings to web development!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Share Article</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Productivity Tools Article -->
+    <div class="modal fade" id="productivityModal" tabindex="-1" aria-labelledby="productivityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productivityModalLabel">10 Tools to Boost Developer Productivity</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Developer Productivity Tools">
+                    <p class="lead">In today's fast-paced development environment, productivity tools can make the difference between meeting deadlines and falling behind. This comprehensive guide explores 10 essential tools that can significantly enhance your development workflow and boost your overall productivity.</p>
+
+                    <h4>1. Code Editors and IDEs</h4>
+
+                    <h5>Visual Studio Code (VS Code)</h5>
+                    <p>The most popular code editor among developers worldwide. Its extensive extension marketplace, built-in Git integration, and customizable interface make it indispensable for modern development.</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <strong>Key Features:</strong>
+                        <ul>
+                            <li>IntelliSense for intelligent code completion</li>
+                            <li>Built-in terminal and debugging</li>
+                            <li>Thousands of extensions available</li>
+                            <li>Multi-platform support (Windows, macOS, Linux)</li>
+                        </ul>
+                    </div>
+
+                    <h5>JetBrains IDEs</h5>
+                    <p>Professional-grade IDEs like IntelliJ IDEA, WebStorm, and PyCharm offer advanced features for specific programming languages and frameworks.</p>
+
+                    <h4>2. Version Control Systems</h4>
+
+                    <h5>Git</h5>
+                    <p>The distributed version control system that revolutionized software development. Essential for collaboration and code management.</p>
+
+                    <h5>GitHub/GitLab</h5>
+                    <p>Web-based platforms that host Git repositories and provide additional collaboration features like issue tracking, pull requests, and CI/CD pipelines.</p>
+
+                    <h4>3. Task and Project Management</h4>
+
+                    <h5>Jira</h5>
+                    <p>Powerful project management tool designed specifically for software development teams. Supports agile methodologies and complex workflows.</p>
+
+                    <h5>Trello</h5>
+                    <p>Simple yet effective Kanban-style project management tool. Perfect for visualizing workflows and tracking progress.</p>
+
+                    <h5>Asana</h5>
+                    <p>Comprehensive task management platform with timeline views, workload management, and team collaboration features.</p>
+
+                    <h4>4. Documentation Tools</h4>
+
+                    <h5>Notion</h5>
+                    <p>All-in-one workspace that combines notes, databases, wikis, and project management. Highly customizable and user-friendly.</p>
+
+                    <h5>Confluence</h5>
+                    <p>Professional documentation platform designed for teams. Excellent for creating and maintaining comprehensive project documentation.</p>
+
+                    <h4>5. Communication and Collaboration</h4>
+
+                    <h5>Slack</h5>
+                    <p>Real-time messaging platform with channel organization, file sharing, and extensive integration capabilities.</p>
+
+                    <h5>Microsoft Teams</h5>
+                    <p>Integrated communication platform combining chat, video calls, file storage, and Office 365 integration.</p>
+
+                    <h4>6. API Development and Testing</h4>
+
+                    <h5>Postman</h5>
+                    <p>Comprehensive API development environment for designing, testing, and documenting APIs.</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <strong>Key Features:</strong>
+                        <ul>
+                            <li>API request building and testing</li>
+                            <li>Automated testing with collections</li>
+                            <li>API documentation generation</li>
+                            <li>Mock servers for development</li>
+                        </ul>
+                    </div>
+
+                    <h5>Insomnia</h5>
+                    <p>Open-source alternative to Postman with a clean interface and powerful features for API testing.</p>
+
+                    <h4>7. Database Management</h4>
+
+                    <h5>DBeaver</h5>
+                    <p>Free, universal database tool that supports all popular databases. Excellent for database administration and development.</p>
+
+                    <h5>TablePlus</h5>
+                    <p>Modern, native database client with a clean interface and support for multiple database types.</p>
+
+                    <h4>8. Containerization and Deployment</h4>
+
+                    <h5>Docker</h5>
+                    <p>Containerization platform that revolutionized application deployment and development environments.</p>
+
+                    <h5>Docker Compose</h5>
+                    <p>Tool for defining and running multi-container Docker applications with a single command.</p>
+
+                    <h4>9. Monitoring and Debugging</h4>
+
+                    <h5>Sentry</h5>
+                    <p>Application monitoring platform that helps identify and fix crashes in real-time.</p>
+
+                    <h5>New Relic</h5>
+                    <p>Full-stack observability platform for monitoring application performance and user experience.</p>
+
+                    <h4>10. Learning and Skill Development</h4>
+
+                    <h5>Codecademy</h5>
+                    <p>Interactive learning platform with hands-on coding exercises in multiple programming languages.</p>
+
+                    <h5>freeCodeCamp</h5>
+                    <p>Free, self-paced coding curriculum with thousands of hours of content and real-world projects.</p>
+
+                    <h4>Essential Developer Tools Categories</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Code Quality Tools</h5>
+                            <ul>
+                                <li>ESLint for JavaScript code quality</li>
+                                <li>Prettier for code formatting</li>
+                                <li>SonarQube for code analysis</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Testing Frameworks</h5>
+                            <ul>
+                                <li>Jest for JavaScript testing</li>
+                                <li>JUnit for Java testing</li>
+                                <li>PyTest for Python testing</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Productivity Best Practices</h4>
+                    <ul>
+                        <li><strong>Keyboard Shortcuts:</strong> Master keyboard shortcuts in your tools to work faster</li>
+                        <li><strong>Automation:</strong> Automate repetitive tasks with scripts and tools</li>
+                        <li><strong>Workflow Optimization:</strong> Regularly review and optimize your development workflow</li>
+                        <li><strong>Continuous Learning:</strong> Stay updated with new tools and technologies</li>
+                        <li><strong>Tool Integration:</strong> Use tools that integrate well with your existing workflow</li>
+                    </ul>
+
+                    <h4>Choosing the Right Tools</h4>
+                    <p>When selecting productivity tools, consider:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Your team size and structure</li>
+                                <li>Your technology stack</li>
+                                <li>Budget constraints</li>
+                                <li>Learning curve</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Integration capabilities</li>
+                                <li>Scalability needs</li>
+                                <li>Community support</li>
+                                <li>Security requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>The Future of Developer Tools</h4>
+                    <p>As AI and machine learning continue to advance, we can expect more intelligent tools that can:</p>
+                    <ul>
+                        <li>Automatically detect and fix bugs</li>
+                        <li>Generate code from natural language descriptions</li>
+                        <li>Provide real-time collaboration features</li>
+                        <li>Offer predictive analytics for project management</li>
+                    </ul>
+
+                    <h4>Tool Ecosystem Integration</h4>
+                    <p>The most productive developers build ecosystems of integrated tools rather than using isolated solutions. For example:</p>
+                    <ul>
+                        <li>VS Code + GitHub + GitHub Actions for CI/CD</li>
+                        <li>Jira + Slack + Confluence for project management</li>
+                        <li>Postman + Swagger for API development</li>
+                        <li>Docker + Kubernetes for container orchestration</li>
+                    </ul>
+
+                    <h4>Productivity Metrics to Track</h4>
+                    <p>Measure your productivity improvements by tracking:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Lines of code per day</li>
+                                <li>Bug fix time</li>
+                                <li>Code review turnaround time</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Deployment frequency</li>
+                                <li>Time to complete features</li>
+                                <li>Team collaboration metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Common Productivity Pitfalls</h4>
+                    <ul>
+                        <li><strong>Tool Overload:</strong> Using too many tools can be counterproductive</li>
+                        <li><strong>Context Switching:</strong> Minimize switching between different tools</li>
+                        <li><strong>Learning Resistance:</strong> Avoid sticking to outdated tools out of comfort</li>
+                        <li><strong>Poor Integration:</strong> Choose tools that work well together</li>
+                    </ul>
+
+                    <h4>Free vs. Paid Tools</h4>
+                    <p>Many excellent productivity tools offer free tiers or open-source alternatives:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Free/Open Source</h6>
+                            <ul>
+                                <li>VS Code</li>
+                                <li>Git</li>
+                                <li>DBeaver</li>
+                                <li>Postman (basic features)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Paid/Premium</h6>
+                            <ul>
+                                <li>JetBrains IDEs</li>
+                                <li>Jira</li>
+                                <li>New Relic</li>
+                                <li>TablePlus</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Building Your Productivity Stack</h4>
+                    <p>Start with essential tools and gradually add more as needed:</p>
+                    <ol>
+                        <li><strong>Foundation:</strong> Code editor, version control, basic project management</li>
+                        <li><strong>Development:</strong> Testing frameworks, API tools, database management</li>
+                        <li><strong>Deployment:</strong> Containerization, monitoring, CI/CD tools</li>
+                        <li><strong>Collaboration:</strong> Communication, documentation, advanced project management</li>
+                    </ol>
+
+                    <p class="text-muted">The right combination of productivity tools can transform your development experience, allowing you to focus more on creative problem-solving and less on repetitive tasks. Invest time in learning and mastering these tools, and you'll see significant improvements in your productivity and code quality.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Share Article</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for Web Security Best Practices Article -->
+    <div class="modal fade" id="securityModal" tabindex="-1" aria-labelledby="securityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="securityModalLabel">Web Security Best Practices for 2023</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid mb-4" alt="Web Security">
+                    <p class="lead">As cyber threats continue to evolve, implementing robust web security practices is crucial for protecting your applications and users. This comprehensive guide covers the essential security measures every web developer should implement in 2023.</p>
+
+                    <h4>Core Security Principles</h4>
+
+                    <h5>Defense in Depth</h5>
+                    <p>Implement multiple layers of security controls. No single security measure is foolproof, so layering defenses ensures that if one fails, others remain effective.</p>
+
+                    <h5>Least Privilege Principle</h5>
+                    <p>Grant users and systems the minimum permissions necessary to perform their functions. This limits the potential damage from compromised accounts or successful attacks.</p>
+
+                    <h5>Fail-Safe Defaults</h5>
+                    <p>Design systems to fail securely. When errors occur, the system should default to the most secure state rather than the most permissive.</p>
+
+                    <h4>Common Web Vulnerabilities and Prevention</h4>
+
+                    <h5>Cross-Site Scripting (XSS)</h5>
+                    <p>XSS attacks occur when malicious scripts are injected into trusted websites. Prevention strategies include:</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <ul>
+                            <li>Input validation and sanitization</li>
+                            <li>Output encoding for user-generated content</li>
+                            <li>Content Security Policy (CSP) headers</li>
+                            <li>Using frameworks with built-in XSS protection</li>
+                        </ul>
+                    </div>
+
+                    <h5>SQL Injection</h5>
+                    <p>SQL injection occurs when attackers manipulate database queries through unsanitized input.</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <strong>Prevention:</strong>
+                        <ul>
+                            <li>Use prepared statements and parameterized queries</li>
+                            <li>Input validation and type checking</li>
+                            <li>Stored procedures with proper access controls</li>
+                            <li>ORM libraries with built-in protection</li>
+                        </ul>
+                    </div>
+
+                    <h5>Cross-Site Request Forgery (CSRF)</h5>
+                    <p>CSRF attacks trick users into performing unwanted actions on authenticated websites.</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <strong>Protection Methods:</strong>
+                        <ul>
+                            <li>CSRF tokens in forms and AJAX requests</li>
+                            <li>SameSite cookie attributes</li>
+                            <li>Custom request headers for AJAX calls</li>
+                            <li>Double-submit cookie pattern</li>
+                        </ul>
+                    </div>
+
+                    <h4>Authentication and Authorization</h4>
+
+                    <h5>Secure Authentication</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Password Security</h6>
+                            <ul>
+                                <li>Enforce strong password policies</li>
+                                <li>Implement password hashing (bcrypt, Argon2)</li>
+                                <li>Multi-factor authentication (MFA)</li>
+                                <li>Account lockout mechanisms</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Session Management</h6>
+                            <ul>
+                                <li>Secure session cookies (HttpOnly, Secure, SameSite)</li>
+                                <li>Session timeout and renewal</li>
+                                <li>Server-side session storage</li>
+                                <li>Regenerate session IDs after login</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h5>Authorization Best Practices</h5>
+                    <p>Implement proper access controls to ensure users can only access resources they're authorized to use.</p>
+                    <ul>
+                        <li><strong>Role-Based Access Control (RBAC):</strong> Assign permissions based on user roles</li>
+                        <li><strong>Attribute-Based Access Control (ABAC):</strong> Use attributes for fine-grained permissions</li>
+                        <li><strong>API Authorization:</strong> Use OAuth 2.0 and OpenID Connect for API access</li>
+                        <li><strong>Resource-Level Permissions:</strong> Check permissions at the resource level</li>
+                    </ul>
+
+                    <h4>Data Protection</h4>
+
+                    <h5>Encryption</h5>
+                    <p>Protect sensitive data both in transit and at rest.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>In Transit</h6>
+                            <ul>
+                                <li>HTTPS with TLS 1.3</li>
+                                <li>HSTS headers</li>
+                                <li>Certificate pinning</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>At Rest</h6>
+                            <ul>
+                                <li>Database encryption</li>
+                                <li>File system encryption</li>
+                                <li>Key management systems</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h5>Data Sanitization</h5>
+                    <p>Always validate and sanitize user input to prevent injection attacks.</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <code>// Example input validation<br>function sanitizeInput(input) {<br>&nbsp;&nbsp;return input.replace(/[<>"']/g, '');<br>}</code>
+                    </div>
+
+                    <h4>Security Headers</h4>
+                    <p>Implement essential HTTP security headers to protect against various attacks.</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <strong>Essential Headers:</strong>
+                        <ul>
+                            <li><code>Content-Security-Policy</code>: Prevent XSS attacks</li>
+                            <li><code>X-Frame-Options</code>: Prevent clickjacking</li>
+                            <li><code>X-Content-Type-Options</code>: Prevent MIME sniffing</li>
+                            <li><code>Strict-Transport-Security</code>: Enforce HTTPS</li>
+                            <li><code>Referrer-Policy</code>: Control referrer information</li>
+                        </ul>
+                    </div>
+
+                    <h4>API Security</h4>
+
+                    <h5>REST API Security</h5>
+                    <ul>
+                        <li>Use HTTPS for all API communications</li>
+                        <li>Implement proper authentication (JWT, OAuth)</li>
+                        <li>Rate limiting to prevent abuse</li>
+                        <li>Input validation and sanitization</li>
+                        <li>Proper error handling without information leakage</li>
+                    </ul>
+
+                    <h5>GraphQL Security</h5>
+                    <p>GraphQL introduces unique security challenges that require specific protections.</p>
+                    <ul>
+                        <li>Query complexity limits</li>
+                        <li>Depth limiting</li>
+                        <li>Amount limiting</li>
+                        <li>Schema validation</li>
+                        <li>Introspection control</li>
+                    </ul>
+
+                    <h4>Security Testing and Monitoring</h4>
+
+                    <h5>Automated Security Testing</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Static Application Security Testing (SAST)</h6>
+                            <ul>
+                                <li>SonarQube</li>
+                                <li>Checkmarx</li>
+                                <li>Fortify</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Dynamic Application Security Testing (DAST)</h6>
+                            <ul>
+                                <li>OWASP ZAP</li>
+                                <li>Burp Suite</li>
+                                <li>Acunetix</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h5>Security Monitoring</h5>
+                    <p>Implement continuous monitoring to detect and respond to security incidents.</p>
+                    <ul>
+                        <li>Log analysis and correlation</li>
+                        <li>Real-time alerting</li>
+                        <li>Security Information and Event Management (SIEM)</li>
+                        <li>Intrusion Detection Systems (IDS)</li>
+                        <li>Web Application Firewalls (WAF)</li>
+                    </ul>
+
+                    <h4>DevSecOps Integration</h4>
+                    <p>Integrate security practices throughout the development lifecycle.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Security in CI/CD</h6>
+                            <ul>
+                                <li>Automated security scans</li>
+                                <li>Dependency vulnerability checks</li>
+                                <li>Container security scanning</li>
+                                <li>Secrets management</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Security Training</h6>
+                            <ul>
+                                <li>Regular security awareness training</li>
+                                <li>Secure coding practices</li>
+                                <li>OWASP Top 10 knowledge</li>
+                                <li>Incident response training</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Compliance and Regulations</h4>
+                    <p>Ensure your applications comply with relevant security standards and regulations.</p>
+                    <ul>
+                        <li><strong>GDPR:</strong> Data protection and privacy regulations</li>
+                        <li><strong>CCPA:</strong> California Consumer Privacy Act</li>
+                        <li><strong>PCI DSS:</strong> Payment card industry standards</li>
+                        <li><strong>HIPAA:</strong> Healthcare data protection</li>
+                        <li><strong>SOX:</strong> Financial reporting compliance</li>
+                    </ul>
+
+                    <h4>Emerging Security Threats</h4>
+                    <p>Stay ahead of evolving threats by understanding emerging attack vectors.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Supply chain attacks</li>
+                                <li>API vulnerabilities</li>
+                                <li>Serverless security risks</li>
+                                <li>IoT and embedded device security</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>AI-powered attacks</li>
+                                <li>Quantum computing threats</li>
+                                <li>5G network security</li>
+                                <li>Web3 and blockchain security</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Security Tools and Resources</h4>
+                    <p>Leverage these tools to enhance your security posture.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Open Source Tools</h6>
+                            <ul>
+                                <li>OWASP ZAP for testing</li>
+                                <li>Wireshark for network analysis</li>
+                                <li>Nmap for network scanning</li>
+                                <li>Metasploit for penetration testing</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Commercial Solutions</h6>
+                            <ul>
+                                <li>Cloudflare WAF</li>
+                                <li>Akamai Kona Site Defender</li>
+                                <li>Imperva Incapsula</li>
+                                <li>Sucuri Website Firewall</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Building a Security Culture</h4>
+                    <p>Security is everyone's responsibility. Foster a culture of security awareness across your organization.</p>
+                    <ul>
+                        <li>Regular security training and awareness programs</li>
+                        <li>Clear security policies and procedures</li>
+                        <li>Bug bounty programs</li>
+                        <li>Security champions in development teams</li>
+                        <li>Open communication about security incidents</li>
+                    </ul>
+
+                    <h4>Incident Response Planning</h4>
+                    <p>Prepare for security incidents with a comprehensive response plan.</p>
+                    <div class="bg-light p-3 rounded mb-3">
+                        <strong>Key Elements:</strong>
+                        <ol>
+                            <li>Incident detection and assessment</li>
+                            <li>Containment and eradication</li>
+                            <li>Recovery and restoration</li>
+                            <li>Post-incident analysis and lessons learned</li>
+                            <li>Communication with stakeholders</li>
+                        </ol>
+                    </div>
+
+                    <h4>Future of Web Security</h4>
+                    <p>As technology evolves, so do security challenges. Stay prepared for emerging trends.</p>
+                    <ul>
+                        <li><strong>Zero Trust Architecture:</strong> Never trust, always verify</li>
+                        <li><strong>AI-Powered Security:</strong> Machine learning for threat detection</li>
+                        <li><strong>Privacy-Enhancing Technologies:</strong> Differential privacy and homomorphic encryption</li>
+                        <li><strong>Web3 Security:</strong> Securing decentralized applications</li>
+                    </ul>
+
+                    <p class="text-muted">Web security is an ongoing process that requires constant vigilance and adaptation. By implementing these best practices and staying informed about emerging threats, you can significantly reduce the risk of security incidents and protect your users' data and trust.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Share Article</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Newsletter form submission
+        document.querySelector('.newsletter-form form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            if (email) {
+                alert(`Thank you for subscribing with: ${email}`);
+                this.reset();
+            }
+        });
+    </script>
+</body>
+</html>
